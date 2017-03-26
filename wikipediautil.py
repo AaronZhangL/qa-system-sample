@@ -3,6 +3,7 @@
 import json
 import urllib
 from google.appengine.api import urlfetch
+from bs4 import BeautifulSoup
 
 API_URL = 'http://en.wikipedia.org/w/api.php'
 
@@ -32,6 +33,12 @@ def search_contents(titles):
         "format": "json",
         "prop": "revisions",
         "rvprop": "content",
+        'rvparse': "",
         "titles": titles,
     }
-    return _send_query(params)
+    res_contents = _send_query(params)
+    wikipedia_content = res_contents["query"]["pages"].values()[0]["revisions"][0]["*"]
+    wikipedia_content = BeautifulSoup(wikipedia_content).get_text()
+    wikipedia_content = wikipedia_content.replace("\n", "  ")
+    wikipedia_content = wikipedia_content.replace("\"", "")
+    return wikipedia_content
