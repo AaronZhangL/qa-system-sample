@@ -106,9 +106,9 @@ def extract_candidates(text, question_type, query_words):
             "content": text
         },
         "features": {
-            "extractSyntax": True,
+            "extractSyntax": False,
             "extractEntities": True,
-            "extractDocumentSentiment": False
+            "extractDocumentSentiment": True
         },
         "encodingType": "UTF8"
     }
