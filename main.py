@@ -35,7 +35,7 @@ def show_result():
         question=rep["question"],
         translated_question=rep["translatedQuestion"],
         question_type=rep["questionType"],
-        wikipedia_title=rep["wikipediaTitle"],
+        wikipedia_title=rep["wikipediaTitle"].decode("utf-8"),
         query_words=json.dumps(rep["queryWords"]),
         candidates=json.dumps(collections.Counter(rep["candidates"]).most_common(5), ensure_ascii=False)
     )
@@ -53,7 +53,8 @@ def api_factoid():
 
 def reply_factoid(question):
     # Translate to English
-    translated_question = translate_text_to_english(question)
+    # translated_question = translate_text_to_english(question)
+    translated_question = question
     # Extract query words from question
     entity_response = extract_entities(translated_question)
     query_words = [entity.name for entity in entity_response.entities]
