@@ -54,7 +54,6 @@ def api_factoid():
 def reply_factoid(question):
     # Translate to English
     translated_question = translate_text_to_english(question)
-    translated_question = question
     # Extract query words from question
     entity_response = extract_entities(translated_question)
     query_words = [entity.name for entity in entity_response.entities]
