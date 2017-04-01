@@ -24,7 +24,6 @@ def main():
 def show_result():
     question = flask.request.args.get("question".encode("utf-8"))
     rep = factoid.reply(question)
-    print rep
     res = flask.render_template(
         "result.html",
         question=rep["question"],
