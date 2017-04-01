@@ -10,7 +10,7 @@ API_URL = 'http://en.wikipedia.org/w/api.php'
 
 def _send_query(params):
     res = urlfetch.fetch(
-        url=API_URL+"?"+urllib.urlencode(params),
+        url="{0}?{1}".format(API_URL, urllib.urlencode(params)),
         method=urlfetch.GET
     )
     res = json.loads(res.content)
