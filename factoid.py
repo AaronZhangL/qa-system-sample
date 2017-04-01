@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+import HTMLParser
+
 from google.cloud import language, translate
 from googleapiclient import discovery
 from oauth2client.client import GoogleCredentials
@@ -68,6 +70,7 @@ def classify_question(question):
 def reply(question):
     # Translate to English
     translated_question = translate_text_to_english(question)
+    translated_question = HTMLParser.HTMLParser().unescape(translated_question)
     # Extract query words from question
     entity_response = extract_entities(translated_question)
     query_words = [entity.name for entity in entity_response.entities]
